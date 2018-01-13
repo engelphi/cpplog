@@ -1,0 +1,7 @@
+[requires]
+fmt/4.1.0@bincrafters/stable
+date/2.3@bincrafters/stable
+
+[generators]
+cmake
+ycm
