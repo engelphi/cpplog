@@ -1,5 +1,5 @@
 {
-  "dependencies": {
+  "engines": {
     "fmt": "5.0.0",
     "date": "2.4.1"
   }
