@@ -6,4 +6,4 @@ class ILoggingBackend {
   public:
     virtual void write(const std::string &msg) = 0;
 };
-}
+} // namespace cpplog

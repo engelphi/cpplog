@@ -1,11 +1,19 @@
-#include <cpplog.hpp>
-#include <date/date.h>
+#include "cpplog.hpp"
+#include "internal/ConsoleLoggingBackend.hpp"
+#include "internal/FileLoggingBackend.hpp"
 
+#include <chrono>
+#include <date/date.h>
+#include <sstream>
 namespace cpplog {
 constexpr char Logger::fmt_prefix_string[];
 
 std::shared_ptr<ILoggingBackend> makeConsoleBackend() {
     return std::make_shared<internal::ConsoleLoggingBackend>();
+}
+
+std::shared_ptr<ILoggingBackend> makeFileBackend(const std::string &file_path) {
+    return std::make_shared<internal::FileLoggingBackend>(file_path);
 }
 
 std::string Logger::getTimestamp() const {
@@ -16,18 +24,17 @@ std::string Logger::getTimestamp() const {
     return ss.str();
 }
 
-std::string
-Logger::severityToString(const cpplog::internal::severity level) const {
+std::string Logger::severityToString(const cpplog::internal::Severity level) const {
     switch (level) {
-        case internal::severity::debug:
+        case internal::Severity::debug:
             return "DEBUG";
-        case internal::severity::info:
+        case internal::Severity::info:
             return "INFO";
-        case internal::severity::warn:
+        case internal::Severity::warn:
             return "WARNING";
-        case internal::severity::error:
+        case internal::Severity::error:
             return "ERROR";
-        case internal::severity::fatal:
+        case internal::Severity::fatal:
             return "FATAL";
     }
     return "";
